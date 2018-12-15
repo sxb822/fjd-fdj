@@ -1,0 +1,24 @@
+{
+  "name": "fjd-fdj",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "gulp": "^4.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sxb822/fjd-fdj.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sxb822/fjd-fdj/issues"
+  },
+  "homepage": "https://github.com/sxb822/fjd-fdj#readme"
+}

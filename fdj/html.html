@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #ccc;
+        }
+
+        .wrap {
+            width: 1050px;
+            height: 550px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+
+        #spic {
+            width: 450px;
+            height: 450px;
+            border: 1px solid #000;
+            float: left;
+            position: relative;
+        }
+
+        #spic img {
+            width: 450px;
+            height: 450px;
+
+        }
+
+        #sf {
+
+            background: orange;
+            opacity: 0.3;
+            position: absolute;
+            left: 0;
+            top: 0;
+            visibility: hidden;
+        }
+
+        #bf {
+            width: 450px;
+            height: 550px;
+            border: 1px solid #000;
+            float: left;
+            overflow: hidden;
+            position: relative;
+            left: 10px;
+            visibility: hidden;
+
+
+            /*  line-height: 56px;
+            text-align: center;
+            background: #fff; */
+        }
+
+        #bf img {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        #ulist {
+            position: absolute;
+            bottom: 15px;
+            width: 402px;
+            height: 56px;
+            overflow: hidden;
+        }
+
+        #ulist a {
+            float: left;
+            width: 10px;
+            height: 54px;
+            border: 1px solid #ccc;
+            text-decoration: none;
+            line-height: 56px;
+            text-align: center;
+            background: #fff;
+
+        }
+
+        #list {
+            float: left;
+            margin-left: 18px;
+            width: 384px;
+
+            position: relative;
+        }
+
+        ul {
+            list-style: none;
+            float: left;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        ul li {
+            float: left;
+            width: 58px;
+            height: 58px;
+            padding-right: 6px;
+
+        }
+
+        ul li img {
+            width: 54px;
+            height: 54px;
+            border: 1px solid #ccc;
+        }
+
+        #right {
+            position: absolute;
+            right: 0;
+            top: 0;
+            color: #333;
+        }
+
+        #left {
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 2;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div id="spic">
+            <img src="images/1.jpg" alt="">
+            <div id="sf"></div>
+        </div>
+        <div id="bf">
+            <img src="images/21.jpg" alt="" id="bpic">
+        </div>
+        <div id="ulist">
+            <a href="javascript:;" id="left">&lt;</a>
+            <div id="list">
+                <ul>
+                    <li><img src="images/11.jpg" alt="" data-big="images/21.jpg" data-small="images/1.jpg"></li>
+                    <li><img src="images/12.jpg" alt="" data-big="images/22.jpg" data-small="images/2.jpg"></li>
+                    <li><img src="images/13.jpg" alt="" data-big="images/23.jpg" data-small="images/3.jpg"></li>
+                    <li><img src="images/14.jpg" alt="" data-big="images/24.jpg" data-small="images/4.jpg"></li>
+                    <li><img src="images/15.jpg" alt="" data-big="images/25.jpg" data-small="images/5.jpg"></li>
+                    <li><img src="images/16.jpg" alt="" data-big="images/26.jpg" data-small="images/6.jpg"></li>
+                    <li><img src="images/17.jpg" alt="" data-big="images/27.jpg" data-small="images/7.jpg"></li>
+                    <li><img src="images/18.jpg" alt="" data-big="images/28.jpg" data-small="images/8.jpg"></li>
+                    <li><img src="images/19.jpg" alt="" data-big="images/29.jpg" data-small="images/9.jpg"></li>
+                    <li><img src="images/17.jpg" alt="" data-big="images/27.jpg" data-small="images/7.jpg"></li>
+                    <li><img src="images/18.jpg" alt="" data-big="images/28.jpg" data-small="images/8.jpg"></li>
+                    <li><img src="images/19.jpg" alt="" data-big="images/29.jpg" data-small="images/9.jpg"></li>
+
+                </ul>
+            </div>
+            <a href="javascript:;" id="right">&gt;</a>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="jquery.min.js"></script>
+<script>
+    ;
+    (function ($) {
+        var wrap = $('.wrap');
+        var spic = $('#spic');
+        var sf = $('#sf');
+        var bpic = $('#bpic');
+        var bf = $('#bf');
+        var spicul = $('#list ul');
+        var spicli = $('#list ul li');
+        var $left = $('#left');
+        var $right = $('#right');
+
+        spic.hover(function () {
+                bf.css('visibility', 'visible');
+                sf.css('visibility', 'visible');
+                sf.css({
+                    width: spic.width() * bf.width() / bpic.width(),
+                    height: spic.height() * bf.height() / bpic.height()
+                });
+                var $scale = bf.width() / sf.width();
+                $(this).on('mousemove', function (e) {
+                    var l = e.pageX - wrap.offset().left - sf.width() / 2;
+                    var t = e.pageY - wrap.offset().top - sf.height() / 2;
+                    var left = spic.width() - sf.width();
+                    var top = spic.height() - sf.height();
+                    l = l < 0 ? 0 : (l > left ? left : l);
+                    t = t < 0 ? 0 : (t > top ? top : t);
+
+                    /* if (l <= 0) {
+                        l = 0;
+                    } else if (l >= spic.width() - sf.width()) {
+                        l = spic.width() - sf.width();
+                    };
+                    if (t <= 0) {
+                        t = 0;
+                    } else if (t >= spic.height() - sf.height()) {
+                        t = spic.height() - sf.height();
+                    } */
+                    sf.css({
+                        left: l,
+                        top: t
+                    });
+                    bpic.css({
+                        left: -l * $scale,
+                        top: -t * $scale
+                    })
+                })
+                spicli.on('click', function () {
+
+                    var sr1 = $(this).find('img').attr('data-big');
+                    var sr2 = $(this).find('img').attr('data-small');
+
+                    spic.find('img').attr('src', sr2);
+                    bpic.attr('src', sr1);
+                })
+                var num = 6; //
+                var liwl = spicli.size();
+                var liw = spicli.eq(0).outerWidth();
+                $right.on('click', function () {
+                    if (liwl > num) {
+                        num++;
+                        $left.css('color', '#333')
+                        if (num == liwl) {
+                            $right.css('color', '#fff');
+                        }
+                        spicul.animate({
+                            left: -(num - 6) * liw
+                        })
+                    }
+                })
+                $left.on('click', function () {
+                    if (num > 6) {
+                        num--;
+                        $right.css('color', '#333');
+
+                        if (num == 6) {
+
+                            $left.css('color', '#fff');
+                            //$right.css('color', '#fff');
+                        }
+                        spicul.animate({
+                            left: -(num - 6) * liw
+                        })
+                    }
+                })
+            },
+            function () {
+                bf.css('visibility', 'hidden');
+                sf.css('visibility', 'hidden');
+            });
+    })(jQuery);
+</script>
