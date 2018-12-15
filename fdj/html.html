@@ -56,11 +56,6 @@
             position: relative;
             left: 10px;
             visibility: hidden;
-
-
-            /*  line-height: 56px;
-            text-align: center;
-            background: #fff; */
         }
 
         #bf img {
@@ -199,17 +194,6 @@
                     var top = spic.height() - sf.height();
                     l = l < 0 ? 0 : (l > left ? left : l);
                     t = t < 0 ? 0 : (t > top ? top : t);
-
-                    /* if (l <= 0) {
-                        l = 0;
-                    } else if (l >= spic.width() - sf.width()) {
-                        l = spic.width() - sf.width();
-                    };
-                    if (t <= 0) {
-                        t = 0;
-                    } else if (t >= spic.height() - sf.height()) {
-                        t = spic.height() - sf.height();
-                    } */
                     sf.css({
                         left: l,
                         top: t
@@ -220,7 +204,6 @@
                     })
                 })
                 spicli.on('click', function () {
-
                     var sr1 = $(this).find('img').attr('data-big');
                     var sr2 = $(this).find('img').attr('data-small');
 
